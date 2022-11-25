@@ -1,63 +1,50 @@
-import React from "react";
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 class AutomobileList extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            automobiles: [],
-        }
-        this.getAutomobiles = this.getAutomobiles.bind(this);
-    }
-
-    async getAutomobiles() {
-        const autoURL = 'http://localhost:8100/api/automobiles/';
-        try {
-            const autoResponse = await fetch(autoURL);
-            if (autoResponse.ok) {
-                const autoData = await autoResponse.json()
-                this.setState({
-                    automobiles: autoData.autos,
-                })
-            };
-        } catch (e) {
-            console.error(e);
-        }
+        this.state = {autos: []}
     }
 
     async componentDidMount() {
-        this.getAutomobiles();
-    }
+        const response = await fetch('http://localhost:8100/api/automobiles/')
+        if (response.ok) {
+          const data = await response.json()
+          this.setState({ autos: data.autos })
+        }
+      }  
 
-    render() {
+    render () {
         return (
-            <React.Fragment>
-                <h2 className="display-5 fw-bold">Automobiles</h2>
-                <table className="table table-dark table-striped border-warning">
-                    <thead>
-                        <tr>
-                            <th>VIN</th>
-                            <th>Color</th>
-                            <th>Year</th>
-                            <th>Model</th>
-                            <th>Manufacturer</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {this.state.automobiles.map(automobile => {
-                            return (
-                                <tr key={automobile.id}>
-                                    <td>{automobile.vin}</td>
-                                    <td>{automobile.color}</td>
-                                    <td>{automobile.year}</td>
-                                    <td>{automobile.model.name}</td>
-                                    <td>{automobile.model.manufacturer.name}</td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
-            </React.Fragment>
-        );
+            <>
+            <h1>Automobiles <Link to="new/"><button className="btn btn-primary btn-lg">Create an Automobile</button></Link></h1>
+            <table className="table table-striped">
+              <thead>
+                <tr>
+                  <th>VIN</th>
+                  <th>Color</th>
+                  <th>Year</th>
+                  <th>Model</th>
+                  <th>Manufacturer</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.autos.map(auto => {
+                  return (
+                    <tr key={auto.id}>
+                      <td>{ auto.vin }</td>
+                      <td>{ auto.color }</td>
+                      <td>{ auto.year }</td>
+                      <td>{ auto.model.name }</td>
+                      <td>{ auto.model.manufacturer.name }</td>                 
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            </>
+        )        
     }
 }
 

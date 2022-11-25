@@ -53,7 +53,7 @@ class ServiceAppointmentList extends React.Component {
   render() {
     return (
       <>
-        <h1>Service Appointments</h1>
+        <h1>Service Appointments</h1> <button variant="outline-success" className="p-3 mb-2 bg-warning text-dark" onClick={() => window.location.reload(false)}>Click to reload!</button>
         <table className="table table-dark table-striped border-warning">
           <thead>
             <tr>
@@ -83,7 +83,20 @@ class ServiceAppointmentList extends React.Component {
                     <td><button className="btn btn-outline-danger" onClick={() => this.deleteService(service)}>Cancel</button></td>
                     <td><button className='btn btn-light' onClick={() => this.finishService(service.id)}>Finish</button></td>
                   </tr>
-                  : null
+                  :
+                  (service.finished === true) ?
+                  <tr key={service.id}>
+                    <td>{service.vin}</td>
+                    <td>{service.owner_name}</td>
+                    <td>{service.date}</td>
+                    <td>{service.time}</td>
+                    <td>{service.technician.name}</td>
+                    <td>{service.reason}</td>
+                    <td>{service.vip ? "VIP" : "Nope"}</td>
+                    <td><button className="btn btn-outline-danger" onClick={() => this.deleteService(service)}>Cancel</button></td>
+                    <td>{service.finished ? "yes" : "Nope"}</td>
+                  </tr>
+              :null                               
               );
             })}
           </tbody>

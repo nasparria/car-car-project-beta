@@ -24,6 +24,11 @@ class ServicesAppointmentsHistory extends React.Component {
     this.setState({ services: datos })
   }
 
+  handleRefresh = () => {
+    // by calling this method react re-renders the component
+    this.setState({});
+  };
+
   async componentDidMount() {
     const servicesUrl = 'http://localhost:8080/api/services/'
 
@@ -44,6 +49,7 @@ class ServicesAppointmentsHistory extends React.Component {
             <input onChange={this.handleVinChange} value={this.state.vin} type="search" placeholder="Car's Vin..."
               className="p-3 mb-2 bg-dark text-white" name="vin" aria-label="Search" id="vin" />
             <button variant="outline-success" className="p-3 mb-2 bg-warning text-dark">Search</button>
+            <button variant="outline-success" className="p-3 mb-2 bg-warning text-dark" onClick={() => window.location.reload(false)}>Click to reload!</button>
           </div>
         </form>
         <table className="table table-dark table-striped border-warning">
