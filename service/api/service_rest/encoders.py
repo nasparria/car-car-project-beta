@@ -1,6 +1,6 @@
 from common.json import ModelEncoder
 
-from .models import Technician, ServiceAppointment, AutomobileVO
+from .models import Technician, ServiceAppointment, AutomobileVO, FormularioCliente
 
 
 class AutomobileVOEncoder(ModelEncoder):
@@ -35,3 +35,16 @@ class ServiceAppointmentEncoder(ModelEncoder):
     encoders = {
         "technician": TechnicianEncoder(),
     }
+
+class FormularioClienteEncoder(ModelEncoder):
+    model = FormularioCliente
+    properties = [
+        "empresa",
+        "titulo",
+        "descripcion"
+        # # "enlace",
+        # # "File",
+        # "Tipo",
+        # "date",
+        # "time"
+    ]

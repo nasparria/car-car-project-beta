@@ -1,8 +1,56 @@
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
-from .models import Technician, ServiceAppointment, AutomobileVO
-from .encoders import AutomobileVOEncoder, TechnicianEncoder, ServiceAppointmentEncoder
+from .models import Technician, ServiceAppointment, AutomobileVO, FormularioCliente
+from .encoders import AutomobileVOEncoder, TechnicianEncoder, ServiceAppointmentEncoder, FormularioClienteEncoder
+
+
+@require_http_methods(["GET", "POST"])
+def api_requerimientos(request):
+    if request.method == "GET":
+        requerimientos = FormularioCliente.objects.all()
+        return JsonResponse(
+            {"requerimientos": requerimientos},
+            encoder=FormularioClienteEncoder,
+        )
+    else:
+        content = json.loads(request.body)
+        requerimiento = FormularioCliente.objects.create(**content)
+        return JsonResponse(
+            requerimiento,
+            encoder=FormularioClienteEncoder,
+            safe=False,
+        )
+        # except:
+        #     response = JsonResponse(
+        #         {"message": "No requerimiento was created, pls try again or ask for help"}
+        #     )
+        #     response.status_code = 400
+        #     return response
+
+@require_http_methods(["GET", "POST"])
+def api_technicians(request):
+    if request.method == "GET":
+        technicians = Technician.objects.all()
+        return JsonResponse(
+            {"technicians": technicians},
+            encoder=TechnicianEncoder,
+        )
+    else:
+        try:
+            content = json.loads(request.body)
+            technician = Technician.objects.create(**content)
+            return JsonResponse(
+                technician,
+                encoder=TechnicianEncoder,
+                safe=False,
+            )
+        except:
+            response = JsonResponse(
+                {"message": "No technician was created, pls try again or ask for help"}
+            )
+            response.status_code = 400
+            return response
 
 
 @require_http_methods(["GET", "POST"])
