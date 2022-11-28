@@ -1,0 +1,26 @@
+[
+    {
+        "model": "service_rest.tipo",
+        "pk": 1,
+        "fields": {
+            "name": "Tecnologia",
+            "abbreviation": "TEC"
+        }
+    },
+    {
+        "model": "service_rest.tipo",
+        "pk": 2,
+        "fields": {
+            "name": "Marketing digital",
+            "abbreviation": "MKTD"
+        }
+    },
+    {
+        "model": "service_rest.tipo",
+        "pk": 3,
+        "fields": {
+            "name": "Analytics",
+            "abbreviation": "ANLT"
+        }
+    }
+]
