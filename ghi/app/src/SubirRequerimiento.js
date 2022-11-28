@@ -51,11 +51,9 @@ class SubirRequerimientoForm extends React.Component {
         };
         const response = await fetch(url, fetchConfig);
         if (response.ok) {
-            let successTag = document.getElementById('success-message');
-            let formTag = document.getElementById('create-owner-form');
-            successTag.classList.remove('d-none');
-            formTag.classList.add('d-none');
-            this.setState({
+            const newRequerimiento = await response.json();
+
+            const cleared = {
                 empresa: '',
                 titulo: '',
                 descripcion: '',
@@ -63,7 +61,8 @@ class SubirRequerimientoForm extends React.Component {
                 date: '',
                 time: '',
                 tipo: '',
-            });
+            };
+            this.setState(cleared);
         }
     }
 
