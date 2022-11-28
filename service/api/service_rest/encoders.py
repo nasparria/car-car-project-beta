@@ -39,12 +39,12 @@ class ServiceAppointmentEncoder(ModelEncoder):
 class FormularioClienteEncoder(ModelEncoder):
     model = FormularioCliente
     properties = [
-        "empresa",
+        "empresa", 
         "titulo",
-        "descripcion"
-        # # "enlace",
-        # # "File",
-        # "Tipo",
-        # "date",
-        # "time"
+        "descripcion",
+        "enlace",
+        # "File",
+        "tipo",
+        "date",
+        "time"
     ]

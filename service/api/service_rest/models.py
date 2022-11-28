@@ -25,22 +25,22 @@ class ServiceAppointment(models.Model):
     finished = models.BooleanField(default=False, null=True, blank=True)
     vip = models.BooleanField(default=False, null=True)
 
-# TIPO_REQUIRIMIENTO = (
-#     ('tecnologia','TECNOLOGIA'),
-#     ('marketing digital', 'MKT'),
-#     ('analytics','ANALYTICIS'),
-# )
+TIPO_REQUIRIMIENTO = (
+    ('tecnologia','TECNOLOGIA'),
+    ('marketing digital', 'MKT'),
+    ('analytics','ANALYTICIS'),
+)
 
 class FormularioCliente(models.Model):
     # user = models.ForeignKey(User, on_delete=models.CASCADE, null=True) # <--- added
     empresa = models.CharField(max_length=21, null=True, unique=True) # nombre de la empresa
     titulo = models.CharField(max_length=66) # titulo del requirimiento
     descripcion = models.CharField(max_length=66) # descripcion del requirimiento
-    # enlace = models.URLField()
+    enlace = models.URLField(null=True)
     # File = models.FileField(null=True)
-    # Tipo = models.CharField(max_length=17, choices=TIPO_REQUIRIMIENTO, default="tecnologia")
-    # date = models.DateField(null=True)
-    # time = models.TimeField(null=True)
+    tipo = models.CharField(max_length=17, choices=TIPO_REQUIRIMIENTO, default="tecnologia")
+    date = models.DateField(null=True)
+    time = models.TimeField(null=True)
     # technician = models.ForeignKey(
     #     Technician,
     #     related_name="technician",
