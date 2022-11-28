@@ -25,11 +25,23 @@ class ServiceAppointment(models.Model):
     finished = models.BooleanField(default=False, null=True, blank=True)
     vip = models.BooleanField(default=False, null=True)
 
-TIPO_REQUIRIMIENTO = (
-    ('tecnologia','TECNOLOGIA'),
-    ('marketing digital', 'MKT'),
-    ('analytics','ANALYTICIS'),
-)
+
+# class State(models.Model):
+#     name = models.CharField(max_length=40)
+#     id1 = models.IntegerField(primary_key=True)
+#     abbreviation = models.CharField(max_length=2, unique=True)
+
+#     def __str__(self):
+#         return f"{self.name}, {self.abbreviation}"
+
+#     class Meta:
+#         ordering = ("id1",)  # Default ordering for State
+
+# TIPO_REQUIRIMIENTO = (
+#     ('tecnologia','TECNOLOGIA'),
+#     ('marketing digital', 'MKT'),
+#     ('analytics','ANALYTICIS'),
+# )
 
 class FormularioCliente(models.Model):
     # user = models.ForeignKey(User, on_delete=models.CASCADE, null=True) # <--- added
@@ -38,7 +50,8 @@ class FormularioCliente(models.Model):
     descripcion = models.CharField(max_length=66) # descripcion del requirimiento
     enlace = models.URLField(null=True)
     # File = models.FileField(null=True)
-    tipo = models.CharField(max_length=17, choices=TIPO_REQUIRIMIENTO, default="tecnologia")
+    # state = models.ForeignKey(
+    #     State, related_name="+", on_delete=models.PROTECT)
     date = models.DateField(null=True)
     time = models.TimeField(null=True)
     # technician = models.ForeignKey(

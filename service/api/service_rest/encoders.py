@@ -1,6 +1,6 @@
 from common.json import ModelEncoder
 
-from .models import Technician, ServiceAppointment, AutomobileVO, FormularioCliente
+from .models import Technician, ServiceAppointment, AutomobileVO, FormularioCliente # State
 
 
 class AutomobileVOEncoder(ModelEncoder):
@@ -36,6 +36,8 @@ class ServiceAppointmentEncoder(ModelEncoder):
         "technician": TechnicianEncoder(),
     }
 
+
+
 class FormularioClienteEncoder(ModelEncoder):
     model = FormularioCliente
     properties = [
@@ -43,8 +45,21 @@ class FormularioClienteEncoder(ModelEncoder):
         "titulo",
         "descripcion",
         "enlace",
+        # "state",
         # "File",
-        "tipo",
+        # "tipo",
         "date",
         "time"
     ]
+
+    # def get_extra_data(self, o):
+    #     return {"state": o.state.abbreviation}
+
+# class StateEncoder(ModelEncoder):
+#     model = State
+#     properties = [
+#         "name",
+#         "abbreviation",
+#         "id",
+#     ]
+#     encoders = {"formulariocliente": FormularioClienteEncoder()}
