@@ -26,16 +26,16 @@ class ServiceAppointment(models.Model):
     vip = models.BooleanField(default=False, null=True)
 
 
-# class State(models.Model):
-#     name = models.CharField(max_length=40)
-#     id1 = models.IntegerField(primary_key=True)
-#     abbreviation = models.CharField(max_length=2, unique=True)
+class Tipo(models.Model):
+    name = models.CharField(max_length=40)
+    id = models.IntegerField(primary_key=True)
+    abbreviation = models.CharField(max_length=4, unique=True)
 
-#     def __str__(self):
-#         return f"{self.name}, {self.abbreviation}"
+    def __str__(self):
+        return f"{self.name}, {self.abbreviation}"
 
-#     class Meta:
-#         ordering = ("id1",)  # Default ordering for State
+    class Meta:
+        ordering = ("id",)  # Default ordering for State
 
 # TIPO_REQUIRIMIENTO = (
 #     ('tecnologia','TECNOLOGIA'),
@@ -50,8 +50,8 @@ class FormularioCliente(models.Model):
     descripcion = models.CharField(max_length=66) # descripcion del requirimiento
     enlace = models.URLField(null=True)
     # File = models.FileField(null=True)
-    # state = models.ForeignKey(
-    #     State, related_name="+", on_delete=models.PROTECT)
+    tipo = models.ForeignKey(
+        Tipo, related_name="+", on_delete=models.PROTECT, default=1)
     date = models.DateField(null=True)
     time = models.TimeField(null=True)
     # technician = models.ForeignKey(

@@ -44,7 +44,7 @@
 //         const datos = { ...this.state };
 //         // delete datos.technicians;
 
-//         const requerimientosUrl = 'http://localhost:8080/api/requerimientos/';
+//         const requerimientosUrl = 'http://localhost:8080/requerimientos/';
 //         const fetchConfig = {
 //             method: "post",
 //             body: JSON.stringify(datos),
@@ -100,7 +100,7 @@
 //     }
 
 //     // async componentDidMount() {
-//     //     const url = 'http://localhost:8080/api/technicians/';
+//     //     const url = 'http://localhost:8080/technicians/';
 
 //     //     const response = await fetch(url);
 

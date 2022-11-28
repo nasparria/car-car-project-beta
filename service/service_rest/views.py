@@ -1,10 +1,12 @@
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
+from django.views.decorators.csrf import csrf_exempt
 import json
-from .models import Technician, ServiceAppointment, AutomobileVO, FormularioCliente
-from .encoders import AutomobileVOEncoder, TechnicianEncoder, ServiceAppointmentEncoder, FormularioClienteEncoder
+from .models import Technician, ServiceAppointment, AutomobileVO, FormularioCliente, Tipo
+from .encoders import AutomobileVOEncoder, TechnicianEncoder, ServiceAppointmentEncoder, FormularioClienteEncoder, TipoEncoder
 
 
+@csrf_exempt
 @require_http_methods(["GET", "POST"])
 def api_requerimientos(request):
     if request.method == "GET":
@@ -15,18 +17,40 @@ def api_requerimientos(request):
         )
     else:
         content = json.loads(request.body)
+        tipo_id = content["tipo"]
+        tipo = Tipo.objects.get(abbreviation=tipo_id)
+        content["tipo"] = tipo
         requerimiento = FormularioCliente.objects.create(**content)
         return JsonResponse(
             requerimiento,
             encoder=FormularioClienteEncoder,
             safe=False,
         )
-        # except:
-        #     response = JsonResponse(
-        #         {"message": "No requerimiento was created, pls try again or ask for help"}
-        #     )
-        #     response.status_code = 400
-        #     return response
+
+@csrf_exempt
+@require_http_methods(["GET", "POST"])
+def api_tipos(request):
+    if request.method == "GET":
+        tipos = Tipo.objects.all()
+        return JsonResponse(
+            {"tipos": tipos},
+            encoder=TipoEncoder,
+        )
+    else:
+        try:
+            content = json.loads(request.body)
+            tipo = Tipo.objects.create(**content)
+            return JsonResponse(
+                tipo,
+                encoder=TipoEncoder,
+                safe=False,
+            )
+        except Tipo.DoesNotExist:
+            response = JsonResponse({"message": "Could not create the State"})
+            response.status_code = 400
+            return response
+
+
 
 @require_http_methods(["GET", "POST"])
 def api_technicians(request):

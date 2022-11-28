@@ -27,7 +27,7 @@ class ServiceAppointmentForm extends React.Component {
         const datos = { ...this.state };
         delete datos.technicians;
 
-        const servicesUrl = 'http://localhost:8080/api/services/';
+        const servicesUrl = 'http://localhost:8080/services/';
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(datos),
@@ -83,7 +83,7 @@ class ServiceAppointmentForm extends React.Component {
     }
 
     async componentDidMount() {
-        const url = 'http://localhost:8080/api/technicians/';
+        const url = 'http://localhost:8080/technicians/';
 
         const response = await fetch(url);
 

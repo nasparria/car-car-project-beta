@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import AutomobileVO, Technician, ServiceAppointment ,FormularioCliente
+from .models import AutomobileVO, Technician, ServiceAppointment ,FormularioCliente, Tipo
 
 
 class AutomobileVOAdmin(admin.ModelAdmin):
@@ -16,8 +16,11 @@ class ServiceAppointmentAdmin(admin.ModelAdmin):
 class FormularioClienteAdmin(admin.ModelAdmin):
     pass
 
+class TipoAdmin(admin.ModelAdmin):
+    pass
 
 admin.site.register(AutomobileVO, AutomobileVOAdmin)
 admin.site.register(Technician, TechnicianAdmin)
 admin.site.register(ServiceAppointment, ServiceAppointmentAdmin)
 admin.site.register(FormularioCliente, FormularioClienteAdmin)
+admin.site.register(Tipo, TipoAdmin)

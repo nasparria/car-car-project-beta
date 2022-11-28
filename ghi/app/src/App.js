@@ -16,7 +16,7 @@ import TechnicianForm from './TechnicianForm';
 import ServiceAppointmentForm from './ServiceAppointmentForm';
 import ServiceAppointmentList from './ServiceAppointmentList';
 import ServicesAppointmentsHistory from './ServiceHistory';
-import SubirRequerimientoForm from './SubirRequerimiento';
+// import SubirRequerimientoForm from './SubirRequerimiento';
 
 function App(props) {
   return (
@@ -31,7 +31,7 @@ function App(props) {
           <Route path="/services/search" element={<ServicesAppointmentsHistory />} />
           <Route path="/services/" element={<ServiceAppointmentList />} />
           <Route path="/models/create" element={<NewVehicleModelForm />} />
-          <Route path="/requerimientos/new" element={<SubirRequerimientoForm />} />
+          {/* <Route path="/requerimientos/new" element={<SubirRequerimientoForm />} /> */}
           <Route path="manufacturers">
             <Route index element={<ManufacturerList manufacturers={props.manufacturers} />} />
             <Route path="new" element={<ManufacturerForm />} />

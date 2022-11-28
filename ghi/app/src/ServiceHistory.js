@@ -30,7 +30,7 @@ class ServicesAppointmentsHistory extends React.Component {
   };
 
   async componentDidMount() {
-    const servicesUrl = 'http://localhost:8080/api/services/'
+    const servicesUrl = 'http://localhost:8080/services/'
 
     const response = await fetch(servicesUrl)
     if (response.ok) {

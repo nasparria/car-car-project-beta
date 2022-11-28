@@ -9,14 +9,14 @@ class ServiceAppointmentList extends React.Component {
   }
 
   async componentDidMount() {
-    const response = await fetch('http://localhost:8080/api/services/')
+    const response = await fetch('http://localhost:8080/services/')
     if (response.ok) {
       const data = await response.json()
       this.setState({ services: data.services })
     }
   }
   async deleteService(service) {
-    const cancelUrl = `http://localhost:8080/api/services/${service.id}`
+    const cancelUrl = `http://localhost:8080/services/${service.id}`
     const fetchConfig = {
       method: "delete"
     }
@@ -29,7 +29,7 @@ class ServiceAppointmentList extends React.Component {
   }
 
   async finishService(service) {
-    const changeUrl = `http://localhost:8080/api/services/${service}/`
+    const changeUrl = `http://localhost:8080/services/${service}/`
 
     const fetchConfig = {
       method: "put",
